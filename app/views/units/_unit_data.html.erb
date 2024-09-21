@@ -1,0 +1,8 @@
+<!-- Statistics Section -->
+<div id="stats" class="card">
+  <h2>Statistics for <%= @unit.name %> Unit</h2>
+  <p>Number of Active Officers: &nbsp;&nbsp;<%= @unit.number_of_active_officers %></p>
+  <p>Number of Open Cases: &nbsp;&nbsp;<%= @unit.number_of_unique_open_investigations %></p>
+  <p>Number of Closed Cases: &nbsp;&nbsp;<%= @unit.number_of_unique_closed_investigations %></p> 
+  <p>Cases Involving Batman: &nbsp;&nbsp;<%= @unit.number_of_unique_investigations_involving_batman %></p> 
+</div>

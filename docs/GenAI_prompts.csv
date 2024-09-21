@@ -1,0 +1,223 @@
+File,Tool,Method_Name,Prompt(s)_Used
+SuspectHistory.js,ChatGPT,error,"fix ""Uncaught TypeError: Cannot read properties of undefined (reading 'length')
+    at SuspectHistory (SuspectHistory.js:65:1)
+    at renderWithHooks (react-dom.development.js:16305:1)
+    at mountIndeterminateComponent (react-dom.development.js:20074:1)
+    at beginWork (react-dom.development.js:21587:1)
+    at HTMLUnknownElement.callCallback (react-dom.development.js:4164:1)
+    at Object.invokeGuardedCallbackDev (react-dom.development.js:4213:1)
+    at invokeGuardedCallback (react-dom.development.js:4277:1)
+    at beginWork$1 (react-dom.development.js:27451:1)
+    at performUnitOfWork (react-dom.development.js:26557:1)
+    at workLoopSync (react-dom.development.js:26466:1)
+react-dom.development.js:18687 The above error occurred in the <SuspectHistory> component:
+
+    at SuspectHistory (http://127.0.0.1:3000/packs/js/app_javascript_components_sync_recursive_.js:596:3)
+    at div
+    at div
+    at Investigation (http://127.0.0.1:3000/packs/js/app_javascript_components_sync_recursive_.js:341:3)"""
+SuspectHistory.js,ChatGPT,select,"use select instead "" <>
+      <AsyncSelect
+        options={options}
+        onChange={({ value }) => setCriminalId(value)}
+        isOptionDisabled={(option) => option.disabled}
+      />
+      <button onClick={() => onSave(criminalId)} disabled={!criminalId}>
+        Save
+      </button>
+      <button onClick={close}>Cancel</button>
+    </>
+  );
+}"""
+InvestigationNote.js,ChatGPT,color display,"make the displayed text ""<h3>Open Investigations in GCPD</h3>
+
+<% if @open_investigations.empty? %>
+  <p>No open cases at this time.</p>
+<% else %>
+  <table class=""striped highlight"">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Date open</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @open_investigations.each do |investigation| %>
+        <tr>
+          <td><%= investigation.title %></td>
+          <td><%= investigation.date_opened.strftime(""%m/%d/%y"") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= will_paginate @open_investigations %>
+<br />
+"" to use this css ""a {
+    color: #800000;
+  }"""
+,ChatGPT,note route," here is the route ""post 'investigations/:id/notes', to: 'investigations#new_note', as: :investigations_note"" and here is the controller ""def new_note
+      @investigation_note = InvestigationNote.new(investigation_note_params)
+      @investigation_note.officer = current_user
+      @investigation_note.investigation = @investigation
+      @investigation_note.date = Date.current
+      @investigation_note.save
+      render json: InvestigationNoteSerializer.new(@investigation_note)
+    end   def investigation_note_params
+      params.require(:investigation_note).permit(:content)
+    end"" to fix the 404 error"
+InvestigationNote.js,ChatGPT,save note,why the note cannot be saved where should i check
+CurrentAssignment.js,ChatGPT,display,"make it into <p> with space to each other ""<li key={assignment.data.id}>
+              {'- '}
+              {assignment.data.attributes.officer.data.attributes.rank}
+               {assignment.data.attributes.officer.data.attributes.first_name}
+               {assignment.data.attributes.officer.data.attributes.last_name}
+              <span> (as of: {FormattedDate(assignment.data.attributes.start_date)})</span>
+            </li>"""
+CurrentAssignment.js,ChatGPT,errorfixed,"what is this error ""DEPRECATION: action_cable.js has been renamed to actioncable.js – please update your reference before Rails 8"""
+criminals_controller.rb,ChatGPT,index,"do the criminal follow this format "" @active_officers = Officer.active.alphabetical.paginate(page: params[:page]).per_page(20)"""
+investigations_controller.rb,ChatGPT,index,"make these with paginaiton    @open_investigations = Investigation.where(date_closed: nil)
+      @closed_investigations = Investigation.where.not(date_closed: nil, solved: true)
+      @closed_unsolved = Investigation.where(date_closed: nil, solved: false)
+      @with_batman = Investigation.where(batman_involved: true)
+      @unassigned_cases = Investigation.left_joins(:assignments).where(assignments: { id: nil })"" with the previous format"
+investigation/index.html.erb,ChatGPT,file,"how to add to <%= will_paginate @open_investigations %>""<h4>Open Investigations in GCPD</h4>
+
+<% if @open_investigations.empty? %>
+  <p>No open cases at this time.</p>
+<% else %>
+  <table class=""striped highlight"">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Date open</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @open_investigations.each do |investigation| %>
+        <tr>
+          <td><%= investigation.title %></td>
+          <td><%= investigation.date_opened.strftime(""%m/%d/%y"") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+<br />
+"""
+suspects_controller.rb,ChatGPT,terminate,"fix the error ""  test_should_terminate_suspect                                   FAIL (0.01s)
+Minitest::Assertion:         Expected: Wed, 27 Mar 2024
+          Actual: nil
+        test/controllers/suspects_controller_test.rb:35:in `block in <class:SuspectsControllerTest>'
+
+  test_should_create_suspect                                      FAIL (0.01s)
+Minitest::Assertion:         ""Suspect.count"" didn't change by 1.
+        Expected: 1
+          Actual: 0
+        test/controllers/suspects_controller_test.rb:20:in `block in <class:SuspectsControllerTest>'
+
+  test_should_get_new                                             FAIL (0.01s)
+Minitest::Assertion:         Expected nil to not be nil.
+        test/controllers/suspects_controller_test.rb:16:in `block in <class:SuspectsControllerTest>'
+
+"" and how to print everything out and debug
+"
+suspects_controller.rb,ChatGPT,create,"what does this mean "" test_should_create_suspect                                     ERROR (0.17s)
+Minitest::UnexpectedError:         ActionController::UrlGenerationError: No route matches {:action=>""create"", :controller=>""suspects""}, missing required keys: [:investigation_id]
+        Did you mean?  suspects_url
+            test/controllers/suspects_controller_test.rb:21:in `block (2 levels) in <class:SuspectsControllerTest>'
+            test/controllers/suspects_controller_test.rb:20:in `block in <class:SuspectsControllerTest>'"""
+CurrentAssignment.js,Copilot,syntax ,"fixed my syntax errors, give me syntax suggestions"
+CurrentAssignment.js,Copilot,autocomplete ,"<div className=""card red lighten-5"">
+      <div className=""card-content"">"
+CurrentAssignment.js,Copilot,autocomplete ,"<span className=""card-title"">Current Assignments</span>"
+CurrentAssignment.js,Copilot,autocomplete ,"{assignment.data.attributes.officer.data.attributes.rank} {' '}
+               {assignment.data.attributes.officer.data.attributes.first_name} {' '}"
+CurrentAssignment.js,Copilot,autocomplete ,"  </li>
+          ))}
+        </p>
+      </div>
+    </div>
+  );
+}"
+CurrentAssignment.js,Copilot,autocomplete ,"CurrentAssignments.propTypes = {
+  assignments: PropTypes.array.isRequired
+};"
+CurrentAssignment.js,Copilot,autocomplete ,export default CurrentAssignments;
+InvestigatonNote.js,Copilot,autocomplete ,"  <button onClick={() => onSave(noteContent)} disabled={noteContent.length === 0}>
+        Save
+      </button>
+      <button onClick={close}>Cancel</button>
+    </>"
+InvestigatonNote.js,Copilot,autocomplete ," InvestigationNoteEditor.propTypes = {
+      close: PropTypes.func.isRequired,
+      onSave: PropTypes.func.isRequired,
+    };"
+InvestigatonNote.js,Copilot,autocomplete ," function onSave(noteContent) {
+      post(`/v1/investigations/${investigationId}/notes`, {
+        investigation_note: {
+          content: noteContent,
+        },
+      }).then((result) => {
+        setEditorOpen(false);
+        setCurrentNotes([result].concat(currentNotes));
+      } );
+    }"
+InvestigatonNote.js,Copilot,autocomplete ,<li key={`note-${note.data.id}`}>
+InvestigatonNote.js,Copilot,autocomplete ,"<div className=""card red lighten-5"">
+            <div className=""card-content"">
+                <span className=""card-title"">Investigation Notes</span>"
+InvestigatonNote.js,Copilot,autocomplete ,"InvestigationNotes.propTypes = 
+{
+    notes: PropTypes.arrayOf(PropTypes.objects).isRequired,
+    investigationId: PropTypes.string.isRequired,
+};"
+InvestigatonNote.js,Copilot,autocomplete ,"
+export default InvestigationNotes;"
+InvestigatonNote.js,Copilot,autocomplete ,"import StringInput from './StringInput';
+import {post} from '../api';"
+InvestigatonNote.js,Copilot,autocomplete ,"import PropTypes from 'prop-types';
+import FormattedDate from './FormattedDate'; "
+InvestigatonNote.js,Copilot,autocomplete ,"import React, { useState } from 'react';"
+SuspectHistory.js,Copilot,autocomplete ,"import Select from ""react-select"";
+import { find } from ""lodash"";"
+SuspectHistory.js,Copilot,autocomplete ,"const [options, setOptions] = React.useState([]);
+  const [criminalId, setCriminalId] = React.useState();"
+SuspectHistory.js,Copilot,autocomplete ,"response.criminals.map((criminal) => {
+          const criminalAlreadyExists = !!find(currentCriminals, {
+            data: { id: criminal.data.id },
+          });"
+SuspectHistory.js,Copilot,autocomplete ,"return {
+            value: criminal.data.id,
+            label: `${first_name} ${last_name}`,"
+SuspectHistory.js,Copilot,autocomplete ," <button onClick={() => onSave(criminalId)} disabled={!criminalId}>
+        Save
+      </button>
+      <button onClick={close}>Cancel</button>"
+SuspectHistory.js,Copilot,autocomplete ,"SuspectEditor.propTypes = {
+  close: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
+  currentCriminals: PropTypes.arrayOf(PropTypes.object).isRequired,
+};"
+SuspectHistory.js,Copilot,autocomplete ,"</li> 
+                    </ul>
+                
+              </li>
+            );
+          })}
+        </ul>
+      </>"
+SuspectHistory.js,Copilot,autocomplete ," <SuspectEditor
+                close={() => setEditorOpen(false)}
+                onSave={onSave}
+                currentCriminals={currentSuspects}
+              />"
+SuspectHistory.js,Copilot,autocomplete ," <div class=""card red lighten-5"">
+        <div class=""card-content"">
+          <span class=""card-title"">Suspects</span>"
+SuspectHistory.js,Copilot,autocomplete ,"SuspectHistory.propTypes = {
+  suspects: PropTypes.arrayOf(PropTypes.object).isRequired,
+  investigationId: PropTypes.string.isRequired,
+};"
+SuspectHistory.js,Copilot,autocomplete ,export default SuspectHistory;

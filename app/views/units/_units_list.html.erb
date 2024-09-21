@@ -1,0 +1,23 @@
+
+
+<!-- Active Units Section -->
+<% if @active_units.empty? %>
+  <p>There are no active units at this time.</p>
+<% else %>
+  <table class="striped highlight">
+    <thead>
+      <tr>
+        <th>Unit</th>
+        <th>Active</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @active_units.each do |unit| %>
+        <tr>
+          <td><%= link_to unit.name, unit %></td>
+          <td>Yes</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

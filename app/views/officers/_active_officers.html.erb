@@ -1,0 +1,21 @@
+<% if @active_officers.empty? %>
+  <h4>There are no active officers in the GCPD at this time.</h4>
+<% else %>
+
+  <table class="striped highlight">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Rank</th>
+      </tr> 
+    </thead>
+    <tbody>
+      <% @active_officers.each do |officer| %>
+        <tr>
+          <td><%= link_to "#{officer.last_name}, #{officer.first_name}", officer_path(officer) %></td>
+          <td><%= officer.rank %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

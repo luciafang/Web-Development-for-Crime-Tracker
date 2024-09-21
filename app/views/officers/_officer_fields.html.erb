@@ -1,0 +1,43 @@
+<%= f.input :first_name, 
+            label_html: { class: 'active' }, 
+            input_html: { id: 'officer_first_name' } %>
+
+<%= f.input :last_name, 
+            label_html: { class: 'active' }, 
+            input_html: { id: 'officer_last_name' } %>
+
+<%= f.input :rank, 
+            collection: Officer::RANKS_LIST, 
+            label_html: { class: 'active' }, 
+            include_blank: true, 
+            input_html: { id: 'officer_rank' } %>
+
+<%= f.input :unit_id, 
+            collection: Unit.all.map { |u| [u.name, u.id] }, 
+            include_blank: true, 
+            label_html: { class: 'active' }, 
+            input_html: { id: 'officer_unit_id' } %>
+
+<%= f.input :ssn, 
+            label_html: { class: 'active' }, 
+            input_html: { id: 'officer_ssn' } %>
+
+<%= f.input :role, 
+            collection: Officer.roles.keys.map { |role| [role.titleize, role] }, 
+            include_blank: true, 
+            label_html: { class: 'active' }, 
+            input_html: { id: 'officer_role' } %>
+
+<%= f.input :username, 
+            label_html: { class: 'active' }, 
+            input_html: { id: 'officer_username' } %>
+
+<%= f.input :password, 
+            label_html: { class: 'active' }, 
+            input_html: { id: 'officer_password' }, 
+            as: :password %>
+
+<%= f.input :password_confirmation, 
+            label_html: { class: 'active' }, 
+            input_html: { id: 'officer_password_confirmation' }, 
+            as: :password %>

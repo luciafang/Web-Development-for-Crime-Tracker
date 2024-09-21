@@ -1,0 +1,67 @@
+<div class="card">
+  <div class="card-content">
+
+
+    <b>Name:&nbsp;&nbsp;</b>
+      <%= "#{@officer.first_name} #{@officer.last_name}" %>
+    <br/><br/>
+
+    <b>Current unit:&nbsp;&nbsp;</b>
+      <%= @officer.unit.name %>
+    <br/><br/>
+
+    <b>Current rank:&nbsp;&nbsp;</b>
+      <%= @officer.rank %>
+    <br/><br/>
+
+    <b>SSN:&nbsp;&nbsp;</b>
+      <%= @officer.ssn.gsub(/(\d{3})(\d{2})(\d{4})/, '\1-\2-\3') %>
+    <br/><br/>
+
+    <b>Active duty?&nbsp;&nbsp;</b>
+      <%= @officer.active ? "Yes" : "No" %>
+    <br/><br/>
+
+    <!-- Existing officer details -->
+    <% if @officer.assignments.current.any? %>
+      <div id="current_assignments" class="card">
+        <div class="card-content">
+          <b>Current Assignments&nbsp;&nbsp;</b>
+            <% @officer.assignments.current.each do |assignment| %>
+              <p>
+                <%= "#{assignment.investigation.title} - Starting" %>
+              </p>
+            <% end %>
+        </div>
+      </div>
+    <% end %>
+    <br/><br/>
+
+  <% unless @officer.assignments.past.empty? %>
+    <div id="past_assignments" class="card">
+      <div class="card-content">
+        <b>Past Assignments&nbsp;&nbsp;</b>
+        <% @officer.assignments.past.each do |assignment| %>
+            <p>
+              <%= "#{assignment.investigation.title} - Ending" %>
+            </p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <br/><br/>
+
+
+    <br/><br/>
+  </div>
+</div>
+
+<button>
+    <%= link_to "Create Officer", new_officer_path %>
+</button>
+
+<button>
+   <%= link_to 'Add a new assignment', new_assignment_path(officer_id: @officer.id), class: "btn" %>
+</button>
+
+

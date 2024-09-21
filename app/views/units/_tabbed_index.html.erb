@@ -1,0 +1,8 @@
+<div id="tabbed">
+  <tabs>
+    <tab name="active units" v-bind:selected="true">
+      <%= render :partial => "units_list", locals: {units: @active_units, state: 'active'} %>
+    </tab>
+  </tabs>
+</div>
+

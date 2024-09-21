@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GCPD Management System</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "https://fonts.googleapis.com/icon?family=Material+Icons" %>
+    <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Bitter|Josefin+Sans|Nunito|Varela+Round" %>
+    <%= javascript_pack_tag "application" %>
+
+    <% javascript_include_tag 'application' %>
+    <link href="https://cdn.jsdelivr.net/npm/react-big-calendar@0.19.0/lib/css/react-big-calendar.css" rel="stylesheet"/>
+
+  </head>
+
+  <body>
+    <header>
+        
+
+    </header>
+    <main>
+      <%= render :partial => "partials/topbar" %>
+      <%= render :partial => "partials/nav" %>
+      
+      <div class="container">
+        <div class="row">
+          <div class="col s12">
+            <%= render :partial => "partials/flash" %>
+
+       
+            <%= yield %>
+
+          </div>
+        </div>
+      </div>
+
+
+    </main>
+    
+    <%= render :partial => "partials/footer" %> 
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>   
+  </body>
+</html>

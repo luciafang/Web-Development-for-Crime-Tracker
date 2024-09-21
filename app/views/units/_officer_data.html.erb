@@ -1,0 +1,29 @@
+<div id="officers" class="card">
+  <h2>Active Officers in <%= @unit.name %> Unit</h2>
+
+  <% if @officers.empty? %>
+    <p>There are no active officers currently in this unit.</p>
+  <% else %>
+    <table class="striped highlight">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Rank</th>
+          <th>Active Assignments</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @officers.each do |officer| %>
+          <tr>
+            <td><%= "#{officer.last_name}, #{officer.first_name}" %></td>
+            <td><%= officer.rank %></td>
+            <td><%= officer.assignments.current.count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @officers %>
+  <% end %>
+</div>
+
+

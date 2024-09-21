@@ -1,0 +1,12 @@
+<h1>Officer Information for <%= @officer.first_name %> <%= @officer.last_name %></h1>
+<p><strong>Current unit:</strong> <%= @officer.unit.name %></p>
+
+
+<%= render partial: "partials/show_structure", locals: {model_name: "officer", 
+                                                         object: @officer,
+                                                         primary: "officer_data", 
+                                                         secondary: nil,
+                                                         sidebar: nil} %>
+
+<br/><br/><br/><br/><br/><br/><br/
+><br/><br/><br/><br/><br/><br/>

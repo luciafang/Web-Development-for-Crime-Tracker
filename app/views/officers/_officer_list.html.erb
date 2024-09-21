@@ -1,0 +1,29 @@
+
+
+<!-- Active Officers Section -->
+
+<% if @active_officers.empty? %>
+  <p>There are no active officers at this time.</p>
+<% else %>
+  <table class="striped highlight">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Current Unit</th>
+        <th>Current Rank</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @active_officers.each do |officer| %>
+        <tr>
+          <td><%= link_to "#{officer.last_name}, #{officer.first_name}", officer_path(officer) %></td>
+          <td><%= officer.unit.name %></td>
+          <td><%= officer.rank %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @active_officers %>
+  
+<% end %>
+
